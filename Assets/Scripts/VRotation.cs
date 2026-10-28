@@ -4,7 +4,7 @@ using UnityEngine;
 public class VRotation : MonoBehaviour
 {
     public float vRotSpeed;
-    public float vRotY;
+    public float vRotY = 0.0f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -14,11 +14,11 @@ public class VRotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        vRotY = -InputSystemManager.instance.mouseDelta.y * vRotSpeed;
+        vRotY += -InputSystemManager.instance.mouseDelta.y * vRotSpeed;
 
-        vRotY = Mathf.Clamp(vRotY, -45, 45);
+        vRotY = Mathf.Clamp(vRotY, -90, 90);
 
-        transform.localEulerAngles += new Vector3(-InputSystemManager.instance.mouseDelta.y * vRotSpeed, 0, 0);
+        transform.localEulerAngles = new Vector3(vRotY * vRotSpeed, 0, 0);
 
         Debug.Log(transform.localEulerAngles.x);
     }
