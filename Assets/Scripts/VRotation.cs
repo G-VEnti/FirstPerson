@@ -16,9 +16,9 @@ public class VRotation : MonoBehaviour
     {
         vRotY += -InputSystemManager.instance.mouseDelta.y * vRotSpeed;
 
-        vRotY = Mathf.Clamp(vRotY, -90, 90);
+        vRotY = Mathf.Clamp(vRotY, -45, 45);
 
-        transform.localEulerAngles = new Vector3(vRotY * vRotSpeed, 0, 0);
+        transform.localRotation = Quaternion.Euler(vRotY, 0, 0);
 
         Debug.Log(transform.localEulerAngles.x);
     }
