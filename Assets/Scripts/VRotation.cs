@@ -3,8 +3,9 @@ using UnityEngine;
 
 public class VRotation : MonoBehaviour
 {
-    public float vRotSpeed;
+    public float vRotSpeed = 0.0f;
     public float vRotY = 0.0f;
+    public float rotAngle = 45f;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -16,10 +17,8 @@ public class VRotation : MonoBehaviour
     {
         vRotY += -InputSystemManager.instance.mouseDelta.y * vRotSpeed;
 
-        vRotY = Mathf.Clamp(vRotY, -45, 45);
+        vRotY = Mathf.Clamp(vRotY, -rotAngle, rotAngle);
 
         transform.localRotation = Quaternion.Euler(vRotY, 0, 0);
-
-        Debug.Log(transform.localEulerAngles.x);
     }
 }

@@ -7,24 +7,23 @@ public class FPSMovement : MonoBehaviour
     public float rayLength;
     public float rayOriginOffset;
     private Rigidbody rb;
-    Vector3 dir;
+    private Vector3 dir;
+    private Vector3 rayOriginPos;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        rayOriginPos = new Vector3(0, rayOriginOffset, 0);
     }
 
     // Update is called once per frame
     void Update()
     {
-        RaycastHit hit;
-
-
         // Raycast hit control
-        if (Physics.Raycast(transform.position + new Vector3(0, rayOriginOffset, 0), -transform.up, out hit, rayLength))
+        if (Physics.Raycast(transform.position + rayOriginPos, -transform.up, rayLength))
         {
-            Debug.DrawRay(transform.position + new Vector3(0, rayOriginOffset, 0), -transform.up * rayLength, Color.green);
+            Debug.DrawRay(transform.position + rayOriginPos, -transform.up * rayLength, Color.green);
 
             dir = InputSystemManager.instance.inputs.Player.Move.ReadValue<Vector2>();
             dir.z = dir.y;
@@ -44,14 +43,5 @@ public class FPSMovement : MonoBehaviour
         }
 
         transform.position += dir * speed * Time.deltaTime;
-
-
-        //if (hit == null)
-
-
-        // transform.position += transform.forward * dir.z * speed * Time.deltaTime;
-        // transform.position += transform.right * dir.x * speed * Time.deltaTime;
-
-
     }
 }
