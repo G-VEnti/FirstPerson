@@ -1,4 +1,3 @@
-using TreeEditor;
 using UnityEngine;
 
 public class ObjectGrabber : MonoBehaviour
@@ -71,6 +70,5 @@ public class ObjectGrabber : MonoBehaviour
                 grabbedDistance = 2f;
             }
         }
-        Debug.Log(hitObject);
     }
 }

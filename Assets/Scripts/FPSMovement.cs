@@ -6,6 +6,7 @@ public class FPSMovement : MonoBehaviour
     public float jumpForce;
     public float rayLength;
     public float rayOriginOffset;
+    public bool isGrounded;
     private Rigidbody rb;
     private Vector3 dir;
     private Vector3 rayOriginPos;
@@ -20,8 +21,9 @@ public class FPSMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        isGrounded = Physics.Raycast(transform.position + rayOriginPos, -transform.up, rayLength);
         // Raycast hit control
-        if (Physics.Raycast(transform.position + rayOriginPos, -transform.up, rayLength))
+        if (isGrounded)
         {
             Debug.DrawRay(transform.position + rayOriginPos, -transform.up * rayLength, Color.green);
 
@@ -43,5 +45,6 @@ public class FPSMovement : MonoBehaviour
         }
 
         transform.position += dir * speed * Time.deltaTime;
+        Debug.Log(InputSystemManager.instance.inputs.Player.Move.ReadValue<Vector2>());
     }
 }
